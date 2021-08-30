@@ -77,3 +77,4 @@ public class Driver {
 }
 
 //Driver class i olmayinca browserutils class i hata verir
+//day32_ we are learning parallel testing
