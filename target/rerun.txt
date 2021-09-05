@@ -1,2 +1,0 @@
-file:src/test/resources/features/AccountTypes.feature:15
-file:src/test/resources/features/Contacts.feature:10:52
