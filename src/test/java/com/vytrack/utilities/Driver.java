@@ -20,13 +20,14 @@ public class Driver {
     private Driver() {
     }
 
+
     // InheritableThreadLocal  --> this is like a container, bag, pool.
     // in this pool we can have separate objects for each thread
     // for each thread, in InheritableThreadLocal we can have separate object for that thread
     // driver class will provide separate webdriver object per thread
     private static InheritableThreadLocal<WebDriver> driverPool = new InheritableThreadLocal<>();
 
-    public static WebDriver get() {
+    public synchronized static WebDriver get() {
         //if this thread doesn't have driver - create it and add to pool
         if (driverPool.get() == null) {
 //            if we pass the driver from terminal then use that one
@@ -80,8 +81,39 @@ public class Driver {
         return driverPool.get();
     }
 
-    public static void closeDriver() {
+    public synchronized static void closeDriver() {
         driverPool.get().quit();
         driverPool.remove();
     }
 }
+    //paralel execution icin new Driver class olusturduk--amacimiz
+    //we camnot have one singleteon object dealing with different browsers bunun yerine for each different execution
+    //we need different singleton object  -- whatever browser is asking  ,taking it from the pool
+
+    //String browser = System.getProperty( "browser" ) != null ? browser = System.getProperty( "browser" ) : ConfigurationReader.get( "browser" ); manasi
+    //su manada eger ben paralel execution icin terminalde mvn verify -Dbrowser=firefox   diye yazip baska bir browser secmezsem ,
+    // browser icin configuration properties file in icindeki browseri kullan
+    //?=if  ,  :=else
+
+
+/*short videos -
+
+ private static ThreadLocal<WebDriver> driverPool = new ThreadLocal<>();  //ThreadLocal class make a copy of webdriver for each Thread
+
+    public static WebDriver get() {
+        //if this thread doesn't have driver - create it and add to pool
+        if (driverPool.get() == null) {
+//            if we pass the driver from terminal then use that one
+//           if we do not pass the driver from terminal then use the one properties file
+            String browser = System.getProperty( "browser" ) != null ? browser = System.getProperty( "browser" ) : ConfigurationReader.get( "browser" );
+            switch (browser) {
+                case "chrome":
+                    WebDriverManager.chromedriver().setup();
+                    driverPool.set( new ChromeDriver() );
+                    break;
+                    ....
+                    ....
+                    ...
+
+                    ve diger browser lari ekle
+ */

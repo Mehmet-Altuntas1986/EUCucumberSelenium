@@ -6,31 +6,36 @@ import org.junit.runner.RunWith;
 
                      //note: bazen test case is passing but there might be some problems (farkina varmadigimiz)
 @RunWith(Cucumber.class)
-@CucumberOptions(
-        plugin = {"json:target/cucumber.json",      //json i target klasorunde cucumber a ekledik (cukesrunner i run edince o klasorun icinde belirdi)
-                "html:target/default-html-reports",  //solda target in icinde default-html-reports olustu (bunda we dont need to run with maven
-                                                     // , sadece right click--> index--> open in browser ,  yani maven +verify demiyoruz)-bunda diagram gibi seyler yok ,
+@CucumberOptions( //my report is taking information from json that is a plugin in pom.xml
+        plugin = {"json:target/cucumber.json",        //json i target klasorunde cucumber a ekledik (cukesrunner i run edince o klasorun icinde belirdi)
+                "html:target/default-html-reports",   //solda target in icinde default-html-reports olustu (bunda we dont need to run with maven
+                                                      // , package right click--> index.html right click--> open in browser ,  yani maven +verify demiyoruz)-bunda diagram gibi seyler yok ,
                                                       // bize hitap ediyor ,manager lara degil cucumber in simple report u , json is much better in reporting
         "rerun:target/rerun.txt"  } ,  // bu kisim ile solda target in icinde rerun.txt olustu bize hata veren class line numaralarini verir, hangi senaryolar hata verir gosterir
                                        //we formed a FailedTestRunner class in runner package to run only failed test cases
 
 
 
-        features = "src/test/resources/features",   // virgul ile yeni bir ozellik ekliyorum
-        glue = "com/vytrack/step_definitions",   //glue bana benim step definitoons larimin yerini buluyor ve baglanti sagliyor
+        features = "src/test/resources/features",   // virgul ile yeni bir ozellik ekliyorum , features ile baglanti sagladi
+        glue = "com/vytrack/step_definitions",      //glue bana benim step definitions larimin yerini buluyor ve baglanti sagliyor
         dryRun = false,
-        tags = "@wip"
+        tags = "@smoke"
 
 )
-public class CukesRunner { //bu class ile test leri run ediyoruz
+
+ public class CukesRunner { //bu class ile test leri run ediyoruz
 }
 
+/*plugin deki json normalde stores date ,  in plugin in line 10 , json is keeping execution
+info related to out last execution , so my report is taking information from json */
 
-//junit ve io.cucumber dependencies ayni version a sahib olmali pom.xml de
-//Somehow we need to tell , het cucumber , hey cukesrunner ,you should not be looking at the runners package ,
+// **** junit ve io.cucumber dependencies ayni version a sahib olmali pom.xml de
+
+// Somehow we need to tell , hey cucumber , hey cukesrunner ,you should not be looking at the runners package ,
 // my features files are under resources and in features folder
 
 //Peki buna nasil ulasiriz?   --->    features="src/test/resources/features"  note lara bak
+
 //you can copy paste the path too
 //for resources you can go outside of the java folder (for path) but for glue you can start inside the java --> from com file
 //"com/vytrack/step_definitions"
@@ -83,9 +88,27 @@ tags= "not @wip"      wip tagi olmayanlar calisir   (version 5 ten once (not) ki
 //        right click==>open in==> choose a browser==> and report
 //  consolu silmek  ve report lari silmek icin ==> en sag maven a tikla===> lifecycle===> click clean (boylece target file silinir,
 //  verify a tiklayinca tekrar geri doner)
-//EUCucumberSelenium (projenin isminin) uzerinde-->saga tikla---> file--> configuration.propertirties olustur
-// day 28 de pages, utilities ve configuration properties ekledik
+//  EUCucumberSelenium (projenin isminin) uzerinde-->saga tikla---> file--> configuration.propertirties olustur
+//  day 28 de pages, utilities ve configuration properties ekledik
 
-//login.feature file ini ac , herhangi bir steoin uzerine gel --> command e basarak mous ok unu uzerlerinde hareket ettir-->
+//login.feature file ini ac , herhangi bir step def.. -in uzerine gel --> command e basarak mous ok unu uzerlerinde hareket ettir-->
 // ve sectigin birinin uzerine tikla --> bu sekilde onun codunun yazilacagi yere kisa yoldan ulasirsin
 //ders esnasinda hangi senaryo uzerinde calisiyorsa genellikle .feature da uzerine @wip  ekledi  @wip (working peosess}
+
+//day 32 de paralel execution icin -- Driver class ve pom.xml updated.sonra features bazi file lara @smoke ekledim paralel execution icin
+
+//sonra intellijy sag taraftan--> maven--> lifecycle-->verify tikla yada intellij terminalinde mnv verify  yaz tikla yada
+//intellij in terminalinde mvn verify    yaz ve tikla --> bunu yapinca birden fazla chrome browser eszamanli isi boluserek test executiona basladi
+
+//3 ten fazla feature da @smoke koyarsak bilgisayar zorlanabilir --bilgisayarin gucu onemli
+//test execution baslayinca--web sayfasi chrome ile acilir--> acilan pencereyi mouse ile tut ve hareket ettir--> hemen altinda baska bir chrome web
+// sayfasinin acilmis oldugunu goreceksin
+
+//paralel test execution icin acilan chrome web sayfasi sayisi= kac tane farkli feature file inin icinde @smoke var
+
+//*****day 32_ de intellijy terminal---> mvn verify -Dbrowser=firefox  diye yazdi ve browser i degistirdi paralel execution icin
+
+//cuke runner-->tags=wip yaziyorr ben ama @smoke kullanmak istiyorum wip e dokunmadan tags nasil degisitirilir?
+//****cevap cukes runner da tags ="wip" -->intellj terminal--> then  mvn verify -Dcucumber.options="--tags @smoke"  diye yaz
+
+//****maven-->verify tiklayinca  hem cukesrunner hemde failedtestrunner      calisir

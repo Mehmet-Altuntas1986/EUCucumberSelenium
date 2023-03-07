@@ -41,11 +41,11 @@ public class Hooks {
 
 
 //there is no connection between feature files and hooks. Hooks will run always so we need to be careful about what we use inside
-//but we have also custom hooks that is running if we have same tag omn top of scenarios
+//but we have also custom hooks that is running if we have same tag on top of scenarios
 
 //("@db")   boyle bir seyi database or api conncetion oldugu zaman kullanacagiz , ornegin 100 tane test senaryosu var
 // ve sadece 20 tanesi databese ile iliskili , butun test leri bununla run etmek  -extends execution time   -- it is gonno put burden to database
 
 //@db senaryo larin oldugu future file inda bunu koydugum yerlerde ---> bu senaryo needs databese connection  --db yi farkli bir isimlede yazabiliriz
 
-//feature file in icindeki senaryolar  , step_definitions paket inin icindekiler tarafindan kullanilabilir, bu yuzden bu oaketin icine Hooks u koyduk
+//feature file in icindeki senaryolar  , step_definitions paket inin icindekiler tarafindan kullanilabilir, bu yuzden bu paketin icine Hooks u koyduk

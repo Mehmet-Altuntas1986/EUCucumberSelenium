@@ -64,6 +64,4 @@ public class ContactsStepDefs {
         System.out.println("actualName = " + actualName);
 
     }
-
-
 }

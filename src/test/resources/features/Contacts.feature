@@ -52,14 +52,15 @@ Feature: Contacts page
       | storemanager85 | <Stephan> | Haley     |
 
 
-# option +7 ile  | bu isareti olusturuyoruz
-  #fn  + sag sol ok
-  #option+command+L  ile yukaridaki pipeline lar belirli bir duzen aliyor, guzel gorunum kazaniyor
+  # option +7 ile  | bu isareti olusturuyoruz
+  # fn  + sag sol ok
+  # option+command+L  ile yukaridaki pipeline lar belirli bir duzen aliyor, guzel gorunum kazaniyor
 
-  #line 39 a gelip @wip koydu, bunu calistigi senaryoya getiriyor, surekli yerini degistiriyor,
-  #daha sonra cukesrunner a gidip dryrun i true yapti ve run etti class i ve boylece hizli bir sekilde missing step
+  # line 39 a gelip @wip koydu, bunu calistigi senaryoya getiriyor, surekli yerini degistiriyor,
+  # daha sonra cukesrunner a gidip dryrun i true yapti ve run etti class i ve boylece hizli bir sekilde missing step
   # definitions consolda belirdi , onlari alip contacts definitions a kopyaladi ve codu yazdi , sonra birdaha false yazdi ve run etti
 
-# numara 10 daki scenario yu bilerek hata verdirdi rapor almak icin, peki rapor almadan once ne yapariz?
-  #once sagdan maven--> verify a tikla --> solda targetin icinde html guncellenir kodlarimizin son haline gore-->
+  # numara 10 daki scenario yu bilerek hata verdirdi rapor almak icin, peki rapor almadan once ne yapariz?
+  # once sagdan maven--> verify a tikla --> solda targetin icinde html guncellenir kodlarimizin son haline gore-->
   # cucumber-html reports u sec-->right click--> open in any browser
+

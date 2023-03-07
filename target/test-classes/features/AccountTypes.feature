@@ -1,17 +1,17 @@
 Feature: Account types
-  @wip
-  Scenario: Driver user
+  @wip @smoke
+  Scenario: Driver user                          #parametre olunca defintionslarda  " " bu isaretler kullanilmistir
     Given the user logged in as "driver"
     When the user navigates to "Activities" "Calendar Events"
     Then the title contains "Calendar Events - Activities"
-#parametre olunca defintionslarda  " " bu isaretler kullanilmistir
+
   @wip
   Scenario: Sales manager user
     Given the user logged in as "sales manager"
     When the user navigates to "Customers" "Accounts"
     Then the title contains "Accounts - Customers"
 
-  @wip
+  @wip @smoke
   Scenario: Store manager user
     Given the user logged in as "store manager"
     When the user navigates to "Customers" "Contacts"
@@ -62,6 +62,7 @@ Feature: Account types
     #we are gonno pass multiple values , we dont wanna change the step definitions . ornegin " elma"  "armut" 2 tae var
    # yanina 1 tane daha ekleseydim step definition i yeniden duzenlemek zorunda kalacaktim, bunu |  |  boyle yapinca
    # yenilerini eklemek step definitions larin degismesine sebebiyet vermez
+
   #bu sayfada dikkat edersen test case ler ayni ama test datalari, verileri farkli, (same test case with different test data =DDT)
   # HOW WE ARE DOING dDT=DATA DRIVEN TESTING (SAME TEST CASE WITH DIFFERENT TEST DATAS
   #senaryo outline varsa examples koymak zorundayiz

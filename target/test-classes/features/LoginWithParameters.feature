@@ -12,9 +12,11 @@ Feature: Login as different users
     Then the user should be able to login
     And the title contains "Dashboard"
 
-    #driver,storemanager,salesmanager
-   #you will have one step definition and it will handle differnet usertypes
+    # driver,storemanager,salesmanager
+    # you will have one step definition and it will handle differnet usertypes
+    # line 5 otomatik olarak iki string parametresi olan step definition a gider--cucumber in kolayliklarindan biri ,
+    # degistirecegim seyi sadece feature de degistiriyorum, code larin oldugu kisimda otomatik degisiyor
+    # command+shift+f  biseyler ararken ise yariyor  --> feature da birseyin uzerine gel ve bunu uygula  @tag larida arayabilirsin
 
-#line 5 otomatik olarak iki string parametresi olan step definition a gider--cucumber in kolayliklarindan biri ,
-# degistirecegim seyi sadece feature de degistiriyorum, code larin oldugu kisimda otomatik degisiyor
-  #command+shift+f  biseyler ararken ise yariyor  --> feature da birseyin uzerine gel ve bunu uygula  @tag larida arayabilirsin
+  Scenario Outline: login with different users
+    Examples:
